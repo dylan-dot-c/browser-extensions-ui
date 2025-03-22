@@ -1,0 +1,17 @@
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans:ital,wght@0,100..900;1,100..900&display=swap');
+@import "tailwindcss";
+@config "../../tailwind.config.js";
+
+
+h2 {
+    @apply text-2xl font-bold my-4;
+}
+body {
+    @apply bg-neutral-200 p-4 font-noto-sans;
+}
+
+button {
+    @apply border-neutral-300 border-1 rounded-full px-4 py-2 text-sm;
+}
+
+

@@ -1,20 +1,17 @@
 import {ref} from "vue";
 import { defineStore } from "pinia";
 import defaultData from "../assets/data"
-import type { Extensions } from "@/types/extension";
+import type { Extensions, ExtensionType } from "@/types/extension";
 
 export const useExtensionStore = defineStore('extensions', () => {
     const extensions = ref<Extensions>(defaultData)
-    // console.log(extensions)
-
-    // extensions.forEach(ext => console.log(ext))
 
     const findExtensionIndex = (extName: string) => {
         return extensions.value.findIndex(ext => ext.name == extName)
     }
     
     const removeExtension = (extensionName: string) => {
-        let extIndex = findExtensionIndex(extensionName)
+        const extIndex = findExtensionIndex(extensionName)
 
         if(extIndex == -1) {
             console.error("Failed to find that extension.");
@@ -24,6 +21,19 @@ export const useExtensionStore = defineStore('extensions', () => {
         extensions.value.splice(extIndex, 1);
     }
 
-    return {extensions, removeExtension}
+    const toggleActive = (extensionName : string) => {
+        // const extIndex = findExtensionIndex(extensionName)
+
+        extensions.value = extensions.value.map((ext) => {
+            if(ext.name == extensionName) {
+                return {...ext, isActive: !ext.isActive}
+            }else {
+                return ext
+            }
+        })
+
+    }
+
+    return {extensions, removeExtension, toggleActive}
 })
 

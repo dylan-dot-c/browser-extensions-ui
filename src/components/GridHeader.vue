@@ -8,7 +8,7 @@ const value = ref(["All", "Active", "Inactive"])
     <h2 class="text-center ">Extensions List</h2>
 
     <div class="flex justify-between px-6">
-    <button v-for="val in value" class="bg-neutral-0 drop-shadow-md px-4 py-2 rounded-full hover:bg-red-600 cursor-pointer">
+    <button v-for="val in value" :key="val" class=" hover:bg-red-600  cursor-pointer" :class="{'bg-red-700 dark:bg-red-500 text-neutral-0 dark:text-neutral-900 border-none' : val == 'All'}">
         {{ val }}
     </button>
     </div>

@@ -2,16 +2,20 @@
 @import "tailwindcss";
 @config "../../tailwind.config.js";
 
+/* @custom-variant hover (&:hover); */
 
-h2 {
-    @apply text-2xl font-bold my-4;
-}
-body {
-    @apply bg-neutral-200 p-4 font-noto-sans;
-}
+@layer base {
 
-button {
-    @apply border-neutral-300 border-1 rounded-full px-4 py-2 text-sm;
+    h2 {
+        @apply text-2xl font-bold my-4 dark:text-neutral-0;
+    }
+    body {
+        @apply bg-light-gradient p-4 font-noto-sans dark:bg-dark-gradient;
+    }
+    
+    button {
+        @apply bg-neutral-0 border-neutral-300 border-1 rounded-full px-4 py-2 text-sm dark:bg-neutral-700 dark:text-white text-neutral-800 font-medium;
+    }
+    
 }
-
 

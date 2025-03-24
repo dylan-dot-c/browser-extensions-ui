@@ -19,7 +19,7 @@ defineProps<{
                 <p class="text-neutral-600 dark:text-neutral-300 leading-6">{{extension.description}}</p>
             </div>
         </div>
-        <div class="flex justify-between pt-4 items-center">
+        <div class="flex justify-between pt-4 lg:pt-12 items-center">
             <button @click="removeExtension(extension.name)">Remove</button>
 
             <label :for="extension.name" class="w-8 h-4 flex items-center rounded-full" :class="{'bg-red-700': extension.isActive, 'bg-neutral-200 dark:bg-neutral-500': !extension.isActive}">

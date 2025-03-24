@@ -6,7 +6,7 @@ const {extensions} = useExtensionStore();
 </script>
 
 <template>
-    <section class="pt-10 space-y-6">
+    <section class="py-10 grid lg:grid-cols-3 md:grid-cols-2 gap-4 ">
         <Extension v-for="info in extensions" :extension="info" :key="info.name" />    
     </section>
 </template>

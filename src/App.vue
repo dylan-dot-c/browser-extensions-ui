@@ -30,7 +30,7 @@ onMounted(() => {
 </script>
 
 <template>
-  <header class="max-w-lg mx-auto ">
+  <header class="mt-6">
     <div class="flex justify-between bg-neutral-0 p-4 rounded-xl dark:bg-neutral-700">
       <img :src="logo" alt="" v-if="theme==='light'">
       <img :src="darkLogo" alt="" v-else>

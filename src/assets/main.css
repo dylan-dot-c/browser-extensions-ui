@@ -10,7 +10,7 @@
         @apply text-2xl font-bold my-4 dark:text-neutral-0;
     }
     body {
-        @apply bg-light-gradient p-4 font-noto-sans dark:bg-dark-gradient;
+        @apply max-w-7xl m-auto bg-light-gradient p-4 font-noto-sans dark:bg-dark-gradient md:px-10;
     }
     
     button {

@@ -5,4 +5,6 @@ export interface ExtensionType  {
         "isActive": boolean
 }
 
+export type filterType = "All" | "Active" | "Inactive"
+
 export type Extensions = ExtensionType[]

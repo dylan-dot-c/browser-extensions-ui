@@ -1,39 +1,61 @@
-import {ref} from "vue";
+import { computed, reactive, watch } from "vue";
 import { defineStore } from "pinia";
-import defaultData from "../assets/data"
-import type { Extensions, ExtensionType } from "@/types/extension";
+import defaultData from "../assets/data";
+import type { Extensions, filterType } from "@/types/extension";
 
-export const useExtensionStore = defineStore('extensions', () => {
-    const extensions = ref<Extensions>(defaultData)
+const getStoredData = () => {
+  const data = localStorage.getItem("extensions");
+  return data ? (JSON.parse(data) as Extensions) : defaultData;
+};
 
-    const findExtensionIndex = (extName: string) => {
-        return extensions.value.findIndex(ext => ext.name == extName)
-    }
-    
-    const removeExtension = (extensionName: string) => {
-        const extIndex = findExtensionIndex(extensionName)
+export const useExtensionStore = defineStore("extensions", () => {
+  const state = reactive({
+    allExtensions: getStoredData(),
+    activeFilter: "All" as filterType,
+    filterOptions: ["All", "Active", "Inactive"] as filterType[],
+  });
 
-        if(extIndex == -1) {
-            console.error("Failed to find that extension.");
-            return;
-        }
+  const extensions = computed(() =>
+    state.activeFilter === "Active"
+      ? state.allExtensions.filter((ext) => ext.isActive)
+      : state.activeFilter === "Inactive"
+      ? state.allExtensions.filter((ext) => !ext.isActive)
+      : state.allExtensions
+  );
 
-        extensions.value.splice(extIndex, 1);
-    }
+  watch(
+    () => state.allExtensions,
+    (newExtensions) => {
+      localStorage.setItem("extensions", JSON.stringify(newExtensions));
+    },
+    { deep: true } //Ensure it watches deeply
+  );
 
-    const toggleActive = (extensionName : string) => {
-        // const extIndex = findExtensionIndex(extensionName)
+  const resetExtensionState = () => {
+    state.allExtensions = defaultData;
+  };
 
-        extensions.value = extensions.value.map((ext) => {
-            if(ext.name == extensionName) {
-                return {...ext, isActive: !ext.isActive}
-            }else {
-                return ext
-            }
-        })
+  const removeExtension = (extensionName: string) => {
+    state.allExtensions = state.allExtensions.filter(
+      (ext) => ext.name !== extensionName
+    );
+  };
 
-    }
+  const changeFilter = (filter: filterType) => {
+    state.activeFilter = filter;
+  };
 
-    return {extensions, removeExtension, toggleActive}
-})
+  const toggleActive = (extensionName: string) => {
+    const ext = state.allExtensions.find((ext) => ext.name === extensionName);
+    if (ext) ext.isActive = !ext.isActive;
+  };
 
+  return {
+    state,
+    extensions,
+    resetExtensionState,
+    removeExtension,
+    toggleActive,
+    changeFilter,
+  };
+});

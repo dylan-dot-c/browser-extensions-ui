@@ -1,7 +1,8 @@
 <script setup lang="ts">
-import {ref} from "vue"
 
-const value = ref(["All", "Active", "Inactive"])
+import {useExtensionStore} from "../stores/extensions"
+
+const {state, changeFilter} = useExtensionStore();
 </script>
 
 <template>
@@ -9,8 +10,8 @@ const value = ref(["All", "Active", "Inactive"])
         <h2 class="text-center md:text-3xl">Extensions List</h2>
 
     <div class="flex justify-between px-6 gap-4">
-        <button v-for="val in value" :key="val" class=" hover:bg-red-600  cursor-pointer" :class="{'bg-red-700 dark:bg-red-500 text-neutral-0 dark:text-neutral-900 border-none' : val == 'All'}">
-            {{ val }}
+        <button v-for="filter in state.filterOptions" :key="filter" class=" hover:bg-red-600  cursor-pointer" :class="{'bg-red-700 dark:bg-red-500 text-neutral-0 dark:text-neutral-900 border-none' : state.activeFilter == filter}" @click="changeFilter(filter)">
+            {{ filter }}
         </button>
     </div>
     </section>

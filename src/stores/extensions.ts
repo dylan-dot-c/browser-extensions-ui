@@ -9,18 +9,29 @@ const getStoredData = () => {
 };
 
 export const useExtensionStore = defineStore("extensions", () => {
+  const filterOptions = ["all", "active", "inactive"] as filterType[]
+  const url = new URL(window.location.href)
+
+  let filter = url.searchParams.get('filter') || "none"
+  if(!filterOptions.find((f) => f.toLowerCase() == filter)) {
+    filter = "all"
+  }
+
   const state = reactive({
     allExtensions: getStoredData(),
-    activeFilter: "All" as filterType,
-    filterOptions: ["All", "Active", "Inactive"] as filterType[],
+    activeFilter: filter,
+    filterOptions: filterOptions,
   });
 
-  const extensions = computed(() =>
-    state.activeFilter === "Active"
-      ? state.allExtensions.filter((ext) => ext.isActive)
-      : state.activeFilter === "Inactive"
-      ? state.allExtensions.filter((ext) => !ext.isActive)
-      : state.allExtensions
+  const extensions = computed(() =>{
+    const activeFilter = state.activeFilter.toLowerCase().trim()
+
+    return activeFilter === "active"
+    ? state.allExtensions.filter((ext) => ext.isActive)
+    : activeFilter === "inactive"
+    ? state.allExtensions.filter((ext) => !ext.isActive)
+    : state.allExtensions
+  }
   );
 
   watch(
@@ -44,6 +55,10 @@ export const useExtensionStore = defineStore("extensions", () => {
   };
 
   const changeFilter = (filter: filterType) => {
+    const url = new URL(window.location.href)
+    url.searchParams.set("filter", filter)
+    window.history.pushState({filter}, "", url)
+    
     state.activeFilter = filter;
   };
 

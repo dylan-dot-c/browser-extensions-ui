@@ -32,6 +32,8 @@ export const useExtensionStore = defineStore("extensions", () => {
   );
 
   const resetExtensionState = () => {
+    // by app design user cant add new extensions
+    //only delete them
     state.allExtensions = defaultData;
   };
 

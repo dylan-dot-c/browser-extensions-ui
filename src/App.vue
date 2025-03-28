@@ -31,11 +31,11 @@ onMounted(() => {
 
 <template>
   <header class="mt-6">
-    <div class="flex justify-between bg-neutral-0 p-4 rounded-xl dark:bg-neutral-700">
+    <div class="flex justify-between bg-neutral-0 p-4 rounded-xl dark:bg-neutral-800">
       <img :src="logo" alt="" v-if="theme==='light'">
       <img :src="darkLogo" alt="" v-else>
 
-      <button class="text-red-200 bg-neutral-100 dark:bg-neutral-600 border-none rounded-lg p-2" @click="toggleTheme()">
+      <button class="text-red-200 bg-neutral-100 hover:bg-neutral-300 dark:bg-neutral-700 dark:hover:bg-neutral-600 border-none rounded-lg p-2 border-0" @click="toggleTheme()">
         <img :src="moonIcon" alt="Moon icon" v-if="theme == 'light'">
         <img :src="sunIcon" alt="Moon icon" v-else>
       </button>

@@ -1,6 +1,6 @@
 # Frontend Mentor - Browser extensions manager UI solution
 
-This is a solution to the [Browser extensions manager UI challenge on Frontend Mentor](https://www.frontendmentor.io/challenges/browser-extension-manager-ui-yNZnOfsMAp). Frontend Mentor challenges help you improve your coding skills by building realistic projects. 
+This is a solution to the [Browser extensions manager UI challenge on Frontend Mentor](https://www.frontendmentor.io/challenges/browser-extension-manager-ui-yNZnOfsMAp). Frontend Mentor challenges help you improve your coding skills by building realistic projects.
 
 ## Table of contents
 
@@ -35,7 +35,8 @@ Users should be able to:
 
 ### Links
 
-- Solution URL: [https://github.com/dylan-dot-c/browser-extensions-ui](https://github.com/dylan-dot-c/browser-extensions-ui)
+- Github URL: [https://github.com/dylan-dot-c/browser-extensions-ui](https://github.com/dylan-dot-c/browser-extensions-ui)
+- Solution URL: [https://www.frontendmentor.io/solutions/responsive-browser-extension-ui-vue-tailwind-pinia-vef-SQEvbH](https://www.frontendmentor.io/solutions/responsive-browser-extension-ui-vue-tailwind-pinia-vef-SQEvbH)
 - Live Site URL: [https://browser-extensions-ui.netlify.app/](https://browser-extensions-ui.netlify.app/)
 
 ## My process
@@ -62,19 +63,23 @@ I learnt how to properly manage vue state with Pinia and since you can't destruc
 I also learnt how to build an accessible switch, so instead of using a label, i actually wrapped the switch design in a button, tied the animation to a state, and used the button(already accessible html element) to control the functionality.
 
 ```html
-<button 
+<button
   @click="toggleActive(extension.name)"
   class="p-0 border-0 focus:outline-1 focus:outline-red-500 w-8 h-4 flex items-center rounded-full transition"
   :class="{'bg-red-500': extension.isActive, 'bg-neutral-200 dark:bg-neutral-500': !extension.isActive}"
   role="switch"
-  :aria-checked="extension.isActive">
-  <span class="bg-neutral-0 w-3 h-3 rounded-full transition"
-    :class="{'translate-x-4.5': extension.isActive, 'translate-x-0.5': !extension.isActive}">
+  :aria-checked="extension.isActive"
+>
+  <span
+    class="bg-neutral-0 w-3 h-3 rounded-full transition"
+    :class="{'translate-x-4.5': extension.isActive, 'translate-x-0.5': !extension.isActive}"
+  >
   </span>
 </button>
 ```
 
 had to import the config in the new version
+
 ```css
 @config "../../tailwind.config.js";
 ```
@@ -98,7 +103,7 @@ const changeFilter = (filter: filterType) => {
     const url = new URL(window.location.href)
     url.searchParams.set("filter", filter)
     window.history.pushState({filter}, "", url)
-    
+
     state.activeFilter = filter;
   };
 ```

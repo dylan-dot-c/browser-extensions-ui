@@ -32,6 +32,7 @@ defineProps<{
       </button>
 
       <button
+        type="button"
         title="Toggle Extension"
         @click="toggleActive(extension.name)"
         class="p-0 border-0 focus:outline-1 focus:outline-red-500 w-8 h-4 flex items-center rounded-full transition"
